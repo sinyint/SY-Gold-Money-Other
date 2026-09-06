@@ -12,7 +12,7 @@
             --header-color: #0f172a;
             --summary-bg: #0f172a;
             --gold-bg: #fffbeb;
-            --gold-border: #fde68a;
+            --gold-border: #f59e0b;
             --contact-color: #8b5cf6;
         }
 
@@ -20,7 +20,7 @@
         body { 
             background: var(--primary-bg); 
             margin: 0; 
-            padding: 12px; 
+            padding: 8px; 
             position: relative;
             min-height: 100vh;
         }
@@ -39,177 +39,264 @@
             z-index: 0;
         }
 
-        .color-picker-card, .contact-setting-card, .backup-card {
+        .collapsible-card {
             background: #ffffff;
-            border-radius: 6px;
-            padding: 6px 8px;
+            border-radius: 8px;
             font-size: 10px;
             margin-bottom: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border: 1px solid #cbd5e1;
+            border: 2px solid #64748b;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             position: relative;
             z-index: 1;
+            overflow: hidden;
         }
 
-        .color-picker-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 6px;
-        }
-
-        .color-item { display: flex; align-items: center; gap: 3px; }
-        .color-item input[type="color"] {
-            border: none; width: 18px; height: 18px; cursor: pointer; background: none; padding: 0;
-        }
-
-        .contact-setting-card {
-            border-left: 3px solid var(--contact-color);
-        }
-
-        .backup-card {
-            border-left: 3px solid #10b981;
-        }
-
-        .contact-setting-card label, .backup-card label {
+        .collapsible-header {
+            padding: 7px 10px;
             font-weight: bold;
-            color: #334155;
+            color: #0f172a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            border-bottom: 1.5px solid #cbd5e1;
+            user-select: none;
+        }
+
+        .collapsible-header::after {
+            content: "▼";
+            font-size: 8px;
+            color: #475569;
+            transition: transform 0.2s ease;
+        }
+
+        .collapsible-card.active .collapsible-header::after {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            display: none;
+            padding: 8px;
+            border-top: 1px solid #cbd5e1;
+            background: #ffffff;
+        }
+
+        .collapsible-card.active .collapsible-content {
             display: block;
-            margin-bottom: 4px;
+        }
+
+        .color-picker-card { 
+            border: 2px solid #0284c7; 
+            border-left: 5px solid #0284c7; 
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15); 
+        }
+        .contact-setting-card { 
+            border: 2px solid var(--contact-color); 
+            border-left: 5px solid var(--contact-color); 
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15); 
+        }
+        .backup-card { 
+            border: 2px solid #10b981; 
+            border-left: 5px solid #10b981; 
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15); 
+        }
+
+        .color-item { display: flex; align-items: center; gap: 3px; font-weight: 600; }
+        .color-item input[type="color"] {
+            border: 1px solid #94a3b8; width: 20px; height: 20px; cursor: pointer; background: none; padding: 0; border-radius: 4px;
         }
 
         .two-cols-compact {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6px;
-            margin-bottom: 4px;
+            gap: 4px;
+            margin-bottom: 3px;
         }
 
-        h2 { text-align: center; color: var(--header-color); margin: 2px 0 10px 0; font-size: 16px; font-weight: bold; }
+        h2 { text-align: center; color: var(--header-color); margin: 2px 0 8px 0; font-size: 15px; font-weight: bold; }
 
         .form-card, .filter-card, .summary-card {
             background: #ffffff;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            margin-bottom: 12px;
+            padding: 8px;
+            border-radius: 8px;
+            border: 2px solid #94a3b8;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 8px;
             position: relative;
             z-index: 1;
         }
 
-        .summary-card { background: var(--summary-bg); color: #ffffff; }
-        .summary-title { font-size: 11px; font-weight: bold; color: #94a3b8; text-align: center; margin-bottom: 6px; }
-        .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .summary-box { background: rgba(255,255,255,0.08); padding: 6px 8px; border-radius: 6px; text-align: center; }
-        .summary-label { font-size: 9px; color: #cbd5e1; }
+        .form-card {
+            border: 2px solid #0284c7;
+            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.12);
+        }
+
+        .filter-card {
+            border: 2px solid #64748b;
+            box-shadow: 0 4px 12px rgba(100, 116, 139, 0.12);
+        }
+
+        .summary-card { 
+            background: var(--summary-bg); 
+            color: #ffffff; 
+            border: 2px solid #334155; 
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25); 
+        }
+        .summary-title { font-size: 11px; font-weight: bold; color: #cbd5e1; text-align: center; margin-bottom: 4px; }
+        .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .summary-box { 
+            background: rgba(255,255,255,0.08); 
+            padding: 5px 6px; 
+            border-radius: 6px; 
+            text-align: center; 
+            border: 1.5px solid rgba(255, 255, 255, 0.15); 
+        }
+        .summary-label { font-size: 9px; color: #cbd5e1; font-weight: 600; }
         .summary-val { font-size: 11px; font-weight: bold; margin-top: 2px; }
 
-        .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-        .three-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+        .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+        .three-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; margin-bottom: 6px; }
 
         input, select, button { 
-            width: 100%; padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; outline: none; 
+            width: 100%; padding: 5px 7px; border: 1.5px solid #94a3b8; border-radius: 6px; font-size: 11px; outline: none; background-color: #ffffff;
+        }
+
+        input:focus, select:focus {
+            border-color: #0284c7;
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
         }
 
         .select-wrapper { position: relative; width: 100%; }
-        .select-wrapper select { appearance: none; -webkit-appearance: none; padding-right: 20px; cursor: pointer; background-color: #ffffff; }
-        .select-wrapper::after { content: "▼"; font-size: 8px; color: #64748b; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+        .select-wrapper select { appearance: none; -webkit-appearance: none; padding-right: 18px; cursor: pointer; background-color: #ffffff; }
+        .select-wrapper::after { content: "▼"; font-size: 7px; color: #475569; position: absolute; right: 7px; top: 50%; transform: translateY(-50%); pointer-events: none; }
 
-        .select-in select { border-color: #bbf7d0; color: #16a34a; font-weight: 600; }
-        .select-out select { border-color: #fecaca; color: #dc2626; font-weight: 600; }
+        .select-in select { border: 2px solid #16a34a; color: #16a34a; font-weight: bold; }
+        .select-out select { border: 2px solid #dc2626; color: #dc2626; font-weight: bold; }
 
-        .gold-card { background: var(--gold-bg); border: 1px solid var(--gold-border); border-radius: 8px; padding: 8px; margin-bottom: 8px; }
-        .gold-title { font-size: 11px; font-weight: bold; color: #d97706; text-align: center; margin-bottom: 4px; }
+        .gold-card { 
+            background: var(--gold-bg); 
+            border: 2px solid var(--gold-border); 
+            border-radius: 6px; 
+            padding: 6px; 
+            margin-bottom: 6px; 
+            box-shadow: 0 2px 8px rgba(217, 119, 6, 0.1); 
+        }
+        .gold-title { font-size: 10px; font-weight: bold; color: #d97706; text-align: center; margin-bottom: 3px; }
 
-        .submit-btn { background: #0284c7; color: white; border: none; font-weight: bold; margin-top: 5px; cursor: pointer; padding: 8px; }
-        .cancel-btn { background: #64748b; color: white; border: none; font-weight: bold; margin-top: 5px; cursor: pointer; padding: 8px; display: none; }
+        .submit-btn { background: #0284c7; color: white; border: none; font-weight: bold; margin-top: 3px; cursor: pointer; padding: 7px; border-radius: 6px; }
+        .cancel-btn { background: #64748b; color: white; border: none; font-weight: bold; margin-top: 3px; cursor: pointer; padding: 7px; display: none; border-radius: 6px; }
 
-        .btn-green { background: #10b981; color: white; border: none; font-weight: bold; padding: 6px; cursor: pointer; border-radius: 4px; font-size: 10px; }
-        .btn-blue { background: #3b82f6; color: white; border: none; font-weight: bold; padding: 6px; cursor: pointer; border-radius: 4px; font-size: 10px; }
+        .btn-green { background: #10b981; color: white; border: none; font-weight: bold; padding: 5px; cursor: pointer; border-radius: 4px; font-size: 10px; }
+        .btn-blue { background: #3b82f6; color: white; border: none; font-weight: bold; padding: 5px; cursor: pointer; border-radius: 4px; font-size: 10px; }
 
-        .person-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; position: relative; z-index: 1; }
-        .person-card { background: #ffffff; border-radius: 8px; padding: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #e2e8f0; }
-        .person-header { border-bottom: 1px solid #f1f5f9; padding-bottom: 4px; margin-bottom: 4px; }
-        .person-name { font-size: 12px; font-weight: bold; color: #0f172a; }
-        .person-phone { font-size: 10px; color: #64748b; }
+        .person-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; position: relative; z-index: 1; }
+        
+        .person-card { 
+            background: #ffffff; 
+            border-radius: 8px; 
+            padding: 6px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06); 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            border: 2px solid #cbd5e1; 
+        }
+        .person-header { border-bottom: 2px solid #e2e8f0; padding-bottom: 3px; margin-bottom: 3px; }
+        .person-name { font-size: 11px; font-weight: bold; color: #0f172a; }
+        .person-phone { font-size: 9px; color: #475569; font-weight: 600; }
 
-        .section-tag { font-size: 9px; font-weight: bold; padding: 2px 4px; border-radius: 4px; margin-top: 3px; margin-bottom: 2px; display: inline-block; }
-        .tag-money { background: #e0f2fe; color: #0369a1; }
-        .tag-gold { background: #fef3c7; color: #b45309; }
+        .section-tag { font-size: 8.5px; font-weight: bold; padding: 2px 5px; border-radius: 4px; margin-top: 2px; margin-bottom: 2px; display: inline-block; }
+        .tag-money { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+        .tag-gold { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
 
-        .mini-row { display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 2px; }
+        .mini-row { display: flex; justify-content: space-between; font-size: 9.5px; margin-bottom: 2px; }
         .val-in { color: #16a34a; font-weight: bold; }
         .val-out { color: #dc2626; font-weight: bold; }
         
         .details-btn { background: none; border: none; color: #0284c7; font-size: 10px; font-weight: bold; text-align: right; padding: 2px 0 0 0; cursor: pointer; text-decoration: underline; }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-content { background: white; border-radius: 10px; padding: 12px; width: 92%; max-width: 420px; max-height: 85vh; overflow-y: auto; }
-        .modal-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #ddd; padding-bottom: 6px; }
-        .modal-title-group { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-        .modal-header h4 { margin: 0; font-size: 14px; }
-        .contact-info { font-size: 8.5px; color: var(--contact-color); font-weight: bold; line-height: 1.2; }
-        .close-btn { font-size: 18px; font-weight: bold; cursor: pointer; color: #64748b; line-height: 1; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; border-radius: 8px; padding: 10px; width: 94%; max-width: 400px; max-height: 85vh; overflow-y: auto; border: 2px solid #475569; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .modal-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #cbd5e1; padding-bottom: 5px; }
+        .modal-title-group { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+        .modal-header h4 { margin: 0; font-size: 13px; }
+        .contact-info { font-size: 8px; color: var(--contact-color); font-weight: bold; line-height: 1.2; }
+        .close-btn { font-size: 16px; font-weight: bold; cursor: pointer; color: #64748b; line-height: 1; }
         
-        #modalCaptureArea { background: #ffffff; padding: 10px; border-radius: 8px; }
+        #modalCaptureArea { background: #ffffff; padding: 8px; border-radius: 6px; }
         
-        .history-item { border-bottom: 1px solid #f1f5f9; padding: 6px 0; font-size: 11px; }
-        .history-date { font-size: 9px; color: #94a3b8; }
+        .history-item { border-bottom: 1.5px solid #e2e8f0; padding: 5px 0; font-size: 10px; }
+        .history-date { font-size: 8.5px; color: #64748b; font-weight: 600; }
         .history-row { display: flex; justify-content: space-between; align-items: center; margin-top: 2px; }
         
-        .action-btns { display: flex; gap: 6px; align-items: center; }
-        .edit-item { color: #0284c7; cursor: pointer; font-weight: bold; font-size: 11px; }
-        .del-item { color: #dc2626; cursor: pointer; font-weight: bold; font-size: 11px; }
+        .action-btns { display: flex; gap: 5px; align-items: center; }
+        .edit-item { color: #0284c7; cursor: pointer; font-weight: bold; font-size: 10px; }
+        .del-item { color: #dc2626; cursor: pointer; font-weight: bold; font-size: 10px; }
 
-        .export-btn { background: #16a34a; color: white; border: none; font-weight: bold; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 11px; margin-top: 10px; width: 100%; }
+        .export-btn { background: #16a34a; color: white; border: none; font-weight: bold; padding: 6px; border-radius: 6px; cursor: pointer; font-size: 10px; margin-top: 8px; width: 100%; }
     </style>
 </head>
 <body>
 
     <!-- 🎨 အရောင် ပြင်ရန် Box -->
-    <div class="color-picker-card">
-        <span style="font-weight: bold; color: #475569;">🎨 အရောင်ပြင်ရန်:</span>
-        <div class="color-item">
-            <span>နောက်ခံ</span>
-            <input type="color" id="bgPicker" value="#f1f5f9" onchange="changeColor('--primary-bg', this.value)">
+    <div class="collapsible-card color-picker-card">
+        <div class="collapsible-header" onclick="toggleCard(this.parentElement)">
+            <span>🎨 အရောင် ပြင်ဆင်ရန်</span>
         </div>
-        <div class="color-item">
-            <span>အနှစ်ချုပ်</span>
-            <input type="color" id="summaryPicker" value="#0f172a" onchange="changeColor('--summary-bg', this.value)">
-        </div>
-        <div class="color-item">
-            <span>ရွှေ Box</span>
-            <input type="color" id="goldPicker" value="#fffbeb" onchange="changeColor('--gold-bg', this.value)">
-        </div>
-    </div>
-
-    <!-- 📞 ပြေစာပါ ဖုန်း/Viber စာသား (၄) လိုင်း ပြင်ဆင်ရန် Box -->
-    <div class="contact-setting-card">
-        <label>📞 ပြေစာပေါ်တွင် ပြသမည့် ဖုန်း/Viber စာသား (၄ လိုင်းထိ ထည့်နိုင်ပါသည်)</label>
-        <div class="two-cols-compact">
-            <input type="text" id="contactLine1Input" placeholder="စာကြောင်း (၁)" value="SY Ph&viber 09776666241" oninput="saveContactInfo()">
-            <input type="text" id="contactLine2Input" placeholder="စာကြောင်း (၂)" value="SY Ph&viber 09950504040" oninput="saveContactInfo()">
-        </div>
-        <div class="two-cols-compact">
-            <input type="text" id="contactLine3Input" placeholder="စာကြောင်း (၃) - စိတ်ကြိုက်" value="" oninput="saveContactInfo()">
-            <input type="text" id="contactLine4Input" placeholder="စာကြောင်း (၄) - စိတ်ကြိုက်" value="" oninput="saveContactInfo()">
-        </div>
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px;">
-            <span style="color: #64748b;">စာသား အပြင်အဆင် အရောင်:</span>
-            <div class="color-item">
-                <input type="color" id="contactColorPicker" value="#8b5cf6" onchange="changeColor('--contact-color', this.value)">
+        <div class="collapsible-content">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="color-item">
+                    <span>နောက်ခံ</span>
+                    <input type="color" id="bgPicker" value="#f1f5f9" onchange="changeColor('--primary-bg', this.value)">
+                </div>
+                <div class="color-item">
+                    <span>အနှစ်ချုပ်</span>
+                    <input type="color" id="summaryPicker" value="#0f172a" onchange="changeColor('--summary-bg', this.value)">
+                </div>
+                <div class="color-item">
+                    <span>ရွှေ Box</span>
+                    <input type="color" id="goldPicker" value="#fffbeb" onchange="changeColor('--gold-bg', this.value)">
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 💾 Data များ ဖိုင်အဖြစ် ထုတ်ယူ/ပြန်သွင်းရန် (Backup & Restore) Box -->
-    <div class="backup-card">
-        <label>💾 စာရင်း Data ဖိုင် သိမ်းဆည်းရန် / ပြန်လည်သွင်းရန်</label>
-        <div class="two-cols-compact">
-            <button class="btn-green" onclick="exportDataToFile()">📥 Data ဖိုင် သိမ်းဆည်းမည် (Backup)</button>
-            <button class="btn-blue" onclick="document.getElementById('importFileInput').click()">📤 Data ဖိုင် ပြန်သွင်းမည် (Restore)</button>
+    <!-- 📞 ပြေစာပါ ဖုန်း/Viber စာသား ပြင်ရန် Box -->
+    <div class="collapsible-card contact-setting-card">
+        <div class="collapsible-header" onclick="toggleCard(this.parentElement)">
+            <span>📞 ပြေစာပါ ဖုန်း/Viber စာသား ပြင်ရန်</span>
         </div>
-        <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="importDataFromFile(event)">
+        <div class="collapsible-content">
+            <div class="two-cols-compact">
+                <input type="text" id="contactLine1Input" placeholder="စာကြောင်း (၁)" value="SY Ph&viber 09776666241" oninput="saveContactInfo()">
+                <input type="text" id="contactLine2Input" placeholder="စာကြောင်း (၂)" value="SY Ph&viber 09950504040" oninput="saveContactInfo()">
+            </div>
+            <div class="two-cols-compact">
+                <input type="text" id="contactLine3Input" placeholder="စာကြောင်း (၃)" value="" oninput="saveContactInfo()">
+                <input type="text" id="contactLine4Input" placeholder="စာကြောင်း (၄)" value="" oninput="saveContactInfo()">
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 3px;">
+                <span style="color: #475569; font-weight: bold;">စာသားအရောင်:</span>
+                <div class="color-item">
+                    <input type="color" id="contactColorPicker" value="#8b5cf6" onchange="changeColor('--contact-color', this.value)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 💾 Data သိမ်းရန် / ပြန်သွင်းရန် Box -->
+    <div class="collapsible-card backup-card">
+        <div class="collapsible-header" onclick="toggleCard(this.parentElement)">
+            <span>💾 စာရင်း Data သိမ်းရန် / ပြန်သွင်းရန်</span>
+        </div>
+        <div class="collapsible-content">
+            <div class="two-cols-compact">
+                <button class="btn-green" onclick="exportDataToFile()">📥 Backup သိမ်းမည်</button>
+                <button class="btn-blue" onclick="document.getElementById('importFileInput').click()">📤 Restore ပြန်သွင်းမည်</button>
+            </div>
+            <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="importDataFromFile(event)">
+        </div>
     </div>
 
     <h2>အပ်ငွေ / ကြိုထုတ် / ရွှေစာရင်း</h2>
@@ -221,20 +308,20 @@
                 <div class="summary-label">💳 စုစုပေါင်း အဝင်/အထွက်/လက်ကျန်</div>
                 <div class="summary-val val-in" id="totalMoneyIn">+0</div>
                 <div class="summary-val val-out" id="totalMoneyOut">-0</div>
-                <div class="summary-val" id="totalMoneyBal" style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: 4px; padding-top: 2px;">0</div>
+                <div class="summary-val" id="totalMoneyBal" style="border-top: 1.5px dashed rgba(255,255,255,0.3); margin-top: 3px; padding-top: 2px;">0</div>
             </div>
             <div class="summary-box">
                 <div class="summary-label">✨ စုစုပေါင်း ရွှေ အပ်/ယူ/လက်ကျန်</div>
                 <div class="summary-val val-in" id="totalGoldIn">0ကျပ် 0ပဲ 0ရွေး</div>
                 <div class="summary-val val-out" id="totalGoldOut">0ကျပ် 0ပဲ 0ရွေး</div>
-                <div class="summary-val" id="totalGoldBal" style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: 4px; padding-top: 2px;">0ကျပ် 0ပဲ 0ရွေး</div>
+                <div class="summary-val" id="totalGoldBal" style="border-top: 1.5px dashed rgba(255,255,255,0.3); margin-top: 3px; padding-top: 2px;">0ကျပ် 0ပဲ 0ရွေး</div>
             </div>
         </div>
     </div>
 
     <div class="form-card" id="formCard">
-        <div style="margin-bottom: 8px;">
-            <label style="font-size: 10px; color: #64748b; font-weight: bold;" id="formTitle">စာရင်းအသစ်သွင်းရန်:</label>
+        <div style="margin-bottom: 6px;">
+            <label style="font-size: 10px; color: #334155; font-weight: bold;" id="formTitle">စာရင်းအသစ်သွင်းရန်:</label>
             <input type="date" id="recordDate">
         </div>
 
@@ -250,7 +337,7 @@
 
         <div class="two-cols">
             <div class="select-wrapper select-in">
-                <select id="selectIn" onchange="onSelectInChange()">
+                <select id="selectIn" onchange="handleDropdownChange('selectIn')">
                     <option value="">-- ငွေဝင် စာရင်း --</option>
                     <option value="KBZမှဝင်ငွေ">KBZမှဝင်ငွေ</option>
                     <option value="K.Pမှဝင်ငွေ">K.Pမှဝင်ငွေ</option>
@@ -261,7 +348,7 @@
             </div>
 
             <div class="select-wrapper select-out">
-                <select id="selectOut" onchange="onSelectOutChange()">
+                <select id="selectOut" onchange="handleDropdownChange('selectOut')">
                     <option value="">-- ငွေထွက် စာရင်း --</option>
                     <option value="KBZထဲထည့်အခြား">KBZထဲထည့်အခြား</option>
                     <option value="K.P ထဲထည့်အခြား">K.P ထဲထည့်အခြား</option>
@@ -274,9 +361,9 @@
 
         <div class="gold-card">
             <div class="gold-title">✨ ရွှေစာရင်း (အပ်/ယူ)</div>
-            <div class="two-cols" style="margin-bottom:6px;">
+            <div class="two-cols" style="margin-bottom:5px;">
                 <div class="select-wrapper select-in">
-                    <select id="goldInSelect" onchange="onGoldInChange()">
+                    <select id="goldInSelect" onchange="handleDropdownChange('goldInSelect')">
                         <option value="">+ အပ်ရွှေ ရွေးရန်</option>
                         <option value="အပ်ရွှေ AC (OLD)">အပ်ရွှေ AC (OLD)</option>
                         <option value="အပ်ရွှေ AC (NEW)">အပ်ရွှေ AC (NEW)</option>
@@ -285,7 +372,7 @@
                     </select>
                 </div>
                 <div class="select-wrapper select-out">
-                    <select id="goldOutSelect" onchange="onGoldOutChange()">
+                    <select id="goldOutSelect" onchange="handleDropdownChange('goldOutSelect')">
                         <option value="">- ယူရွှေ ရွေးရန်</option>
                         <option value="ယူရွှေ AC (OLD)">ယူရွှေ AC (OLD)</option>
                         <option value="ယူရွှေ AC (NEW)">ယူရွှေ AC (NEW)</option>
@@ -311,17 +398,17 @@
     </div>
 
     <div class="filter-card">
-        <div style="font-size: 11px; font-weight: bold; margin-bottom: 6px; color: #334155;">🔍 အမည် / ရက်စွဲဖြင့် ရှာဖွေရန်</div>
+        <div style="font-size: 10px; font-weight: bold; margin-bottom: 5px; color: #1e293b;">🔍 အမည် / ရက်စွဲဖြင့် ရှာဖွေရန်</div>
         <div class="two-cols">
             <input type="text" id="searchName" placeholder="လူအမည် ရိုက်ရှာရန်" oninput="render()">
             <input type="date" id="searchDate" onchange="render()">
         </div>
-        <button onclick="clearFilter()" style="margin-top: 4px; background: #e2e8f0; color: #475569; border: none; font-size: 10px; cursor: pointer; padding: 4px;">Filter များ အားလုံးရှင်းမည်</button>
+        <button onclick="clearFilter()" style="margin-top: 3px; background: #cbd5e1; color: #1e293b; border: 1px solid #94a3b8; font-weight: bold; font-size: 9px; cursor: pointer; padding: 4px; border-radius: 4px;">Filter များ အားလုံးရှင်းမည်</button>
     </div>
 
     <div class="person-grid" id="personContainer"></div>
 
-    <!-- Details Modal with Custom Header Contact -->
+    <!-- Details Modal -->
     <div class="modal" id="historyModal">
         <div class="modal-content">
             <div id="modalCaptureArea">
@@ -333,7 +420,7 @@
                     <span class="close-btn" onclick="closeModal()">&times;</span>
                 </div>
                 
-                <div id="modalSummaryBox" style="margin-top: 8px; margin-bottom: 10px; font-size: 11px;"></div>
+                <div id="modalSummaryBox" style="margin-top: 6px; margin-bottom: 8px; font-size: 10px;"></div>
                 <div id="modalHistoryList"></div>
             </div>
 
@@ -343,11 +430,13 @@
 
     <script>
         let records = JSON.parse(localStorage.getItem('side_ledger_v6')) || [];
-        let activeCategory = 'money'; 
-        let activeType = 'in'; 
         let editIndex = -1;
 
         document.getElementById('recordDate').valueAsDate = new Date();
+
+        function toggleCard(cardElement) {
+            cardElement.classList.toggle('active');
+        }
 
         function changeColor(varName, colorValue) {
             document.documentElement.style.setProperty(varName, colorValue);
@@ -355,16 +444,9 @@
         }
 
         function saveContactInfo() {
-            const l1 = document.getElementById('contactLine1Input').value;
-            const l2 = document.getElementById('contactLine2Input').value;
-            const l3 = document.getElementById('contactLine3Input').value;
-            const l4 = document.getElementById('contactLine4Input').value;
-            
-            localStorage.setItem('contactLine1', l1);
-            localStorage.setItem('contactLine2', l2);
-            localStorage.setItem('contactLine3', l3);
-            localStorage.setItem('contactLine4', l4);
-            
+            ['Line1', 'Line2', 'Line3', 'Line4'].forEach(n => {
+                localStorage.setItem(`contact${n}`, document.getElementById(`contact${n}Input`).value);
+            });
             updateModalContactDisplay();
         }
 
@@ -379,14 +461,10 @@
             document.getElementById('contactLine3Input').value = l3;
             document.getElementById('contactLine4Input').value = l4;
             
-            let htmlText = `${l1}<br>${l2}`;
-            if(l3.trim()) htmlText += `<br>${l3}`;
-            if(l4.trim()) htmlText += `<br>${l4}`;
-
-            document.getElementById('modalContactDisplay').innerHTML = htmlText;
+            let lines = [l1, l2, l3, l4].filter(l => l.trim() !== '');
+            document.getElementById('modalContactDisplay').innerHTML = lines.join('<br>');
         }
 
-        /* Data Export (Backup) Function */
         function exportDataToFile() {
             if(records.length === 0) {
                 alert('သိမ်းဆည်းရန် စာရင်း Data မရှိသေးပါ။');
@@ -402,7 +480,6 @@
             downloadAnchor.remove();
         }
 
-        /* Data Import (Restore) Function */
         function importDataFromFile(event) {
             const fileReader = new FileReader();
             fileReader.onload = function(e) {
@@ -427,85 +504,36 @@
         }
 
         function loadColors() {
-            const bg = localStorage.getItem('--primary-bg');
-            const summary = localStorage.getItem('--summary-bg');
-            const gold = localStorage.getItem('--gold-bg');
-            const contact = localStorage.getItem('--contact-color');
-
-            if (bg) {
-                document.documentElement.style.setProperty('--primary-bg', bg);
-                document.getElementById('bgPicker').value = bg;
-            }
-            if (summary) {
-                document.documentElement.style.setProperty('--summary-bg', summary);
-                document.getElementById('summaryPicker').value = summary;
-            }
-            if (gold) {
-                document.documentElement.style.setProperty('--gold-bg', gold);
-                document.getElementById('goldPicker').value = gold;
-            }
-            if (contact) {
-                document.documentElement.style.setProperty('--contact-color', contact);
-                document.getElementById('contactColorPicker').value = contact;
-            }
+            const colors = [
+                { key: '--primary-bg', id: 'bgPicker' },
+                { key: '--summary-bg', id: 'summaryPicker' },
+                { key: '--gold-bg', id: 'goldPicker' },
+                { key: '--contact-color', id: 'contactColorPicker' }
+            ];
+            colors.forEach(c => {
+                const val = localStorage.getItem(c.key);
+                if (val) {
+                    document.documentElement.style.setProperty(c.key, val);
+                    document.getElementById(c.id).value = val;
+                }
+            });
         }
 
         function formatDateDMY(dateStr) {
             if (!dateStr) return 'ရက်စွဲမရှိ';
             const parts = dateStr.split('-');
-            if (parts.length !== 3) return dateStr;
-            return `${parts[2]}/${parts[1]}/${parts[0]}`;
+            return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : dateStr;
         }
 
-        function onSelectInChange() {
-            const val = document.getElementById('selectIn').value;
-            if (val) {
-                document.getElementById('description').value = val;
-                document.getElementById('selectOut').value = '';
-                clearGoldDropdowns();
-                activeCategory = 'money';
-                activeType = 'in';
+        function handleDropdownChange(activeId) {
+            const dropdowns = ['selectIn', 'selectOut', 'goldInSelect', 'goldOutSelect'];
+            const activeEl = document.getElementById(activeId);
+            if (activeEl.value) {
+                document.getElementById('description').value = activeEl.value;
+                dropdowns.forEach(id => {
+                    if (id !== activeId) document.getElementById(id).value = '';
+                });
             }
-        }
-
-        function onSelectOutChange() {
-            const val = document.getElementById('selectOut').value;
-            if (val) {
-                document.getElementById('description').value = val;
-                document.getElementById('selectIn').value = '';
-                clearGoldDropdowns();
-                activeCategory = 'money';
-                activeType = 'out';
-            }
-        }
-
-        function onGoldInChange() {
-            const val = document.getElementById('goldInSelect').value;
-            if (val) {
-                document.getElementById('description').value = val;
-                document.getElementById('goldOutSelect').value = '';
-                document.getElementById('selectIn').value = '';
-                document.getElementById('selectOut').value = '';
-                activeCategory = 'gold';
-                activeType = 'gold_in';
-            }
-        }
-
-        function onGoldOutChange() {
-            const val = document.getElementById('goldOutSelect').value;
-            if (val) {
-                document.getElementById('description').value = val;
-                document.getElementById('goldInSelect').value = '';
-                document.getElementById('selectIn').value = '';
-                document.getElementById('selectOut').value = '';
-                activeCategory = 'gold';
-                activeType = 'gold_out';
-            }
-        }
-
-        function clearGoldDropdowns() {
-            document.getElementById('goldInSelect').value = '';
-            document.getElementById('goldOutSelect').value = '';
         }
 
         function autoFillPhone() {
@@ -574,13 +602,7 @@
             filteredRecords.forEach((rec) => {
                 const name = rec.personName.trim();
                 if (!people[name]) {
-                    people[name] = { 
-                        phone: rec.personPhone || '', 
-                        totalIn: 0, 
-                        totalOut: 0,
-                        goldInYway: 0,
-                        goldOutYway: 0
-                    };
+                    people[name] = { phone: rec.personPhone || '', totalIn: 0, totalOut: 0, goldInYway: 0, goldOutYway: 0 };
                 }
                 if (rec.personPhone) people[name].phone = rec.personPhone;
                 
@@ -620,7 +642,7 @@
             grandGoldBalEl.className = grandGoldBalYway >= 0 ? 'summary-val val-in' : 'summary-val val-out';
 
             if (Object.keys(people).length === 0) {
-                container.innerHTML = '<div style="text-align:center; color:#888; grid-column: 1/-1; font-size:12px;">ရှာဖွေမှုနှင့် ကိုက်ညီသော စာရင်းများ မရှိသေးပါ။</div>';
+                container.innerHTML = '<div style="text-align:center; color:#888; grid-column: 1/-1; font-size:11px;">ရှာဖွေမှုနှင့် ကိုက်ညီသော စာရင်းများ မရှိသေးပါ။</div>';
                 return;
             }
 
@@ -630,13 +652,8 @@
                 const moneyBalText = moneyBal >= 0 ? `+${moneyBal.toLocaleString()}` : `${moneyBal.toLocaleString()}`;
 
                 const netGoldYway = info.goldInYway - info.goldOutYway;
-                let goldLabel = 'ပိုရွှေ';
-                let goldBalClass = 'val-in';
-
-                if (netGoldYway < 0) {
-                    goldLabel = 'စိုက်ရွှေ';
-                    goldBalClass = 'val-out';
-                }
+                let goldLabel = netGoldYway >= 0 ? 'ပိုရွှေ' : 'စိုက်ရွှေ';
+                let goldBalClass = netGoldYway >= 0 ? 'val-in' : 'val-out';
 
                 container.innerHTML += `
                     <div class="person-card">
@@ -648,7 +665,7 @@
                         <div class="section-tag tag-money">💳 ငွေစာရင်း</div>
                         <div class="mini-row"><span style="color:#64748b;">အဝင်:</span><span class="val-in">+${info.totalIn.toLocaleString()}</span></div>
                         <div class="mini-row"><span style="color:#64748b;">အထွက်:</span><span class="val-out">-${info.totalOut.toLocaleString()}</span></div>
-                        <div class="mini-row" style="border-top:1px dashed #e2e8f0; padding-top:2px;">
+                        <div class="mini-row" style="border-top:1.5px dashed #cbd5e1; padding-top:2px;">
                             <span style="font-weight:bold;">ကျန်ငွေ:</span>
                             <span class="${moneyBalClass}">${moneyBalText}</span>
                         </div>
@@ -656,7 +673,7 @@
                         <div class="section-tag tag-gold">✨ ရွှေစာရင်း</div>
                         <div class="mini-row"><span style="color:#64748b;">အပ်ရွှေ:</span><span class="val-in">${formatGold(info.goldInYway)}</span></div>
                         <div class="mini-row"><span style="color:#64748b;">ယူရွှေ:</span><span class="val-out">${formatGold(info.goldOutYway)}</span></div>
-                        <div class="mini-row" style="border-top:1px dashed #e2e8f0; padding-top:2px;">
+                        <div class="mini-row" style="border-top:1.5px dashed #cbd5e1; padding-top:2px;">
                             <span style="font-weight:bold;">${goldLabel}:</span>
                             <span class="${goldBalClass}">${formatGold(netGoldYway)}</span>
                         </div>
@@ -680,10 +697,23 @@
             const goldPe = parseFloat(document.getElementById('goldPe').value) || 0;
             const goldYway = parseFloat(document.getElementById('goldYway').value) || 0;
 
+            const selectIn = document.getElementById('selectIn').value;
+            const selectOut = document.getElementById('selectOut').value;
+            const goldInSelect = document.getElementById('goldInSelect').value;
+            const goldOutSelect = document.getElementById('goldOutSelect').value;
+
+            let category = 'money';
+            let type = 'in';
+
+            if (goldInSelect) { category = 'gold'; type = 'gold_in'; }
+            else if (goldOutSelect) { category = 'gold'; type = 'gold_out'; }
+            else if (selectOut) { category = 'money'; type = 'out'; }
+            else if (selectIn) { category = 'money'; type = 'in'; }
+
             if (!date) { alert('ကျေးဇူးပြု၍ ရက်စွဲ ရွေးပါ။'); return; }
             if (!personName) { alert('ကျေးဇူးပြု၍ လူအမည် ဖြည့်စွက်ပါ။'); return; }
 
-            if (activeCategory === 'gold') {
+            if (category === 'gold') {
                 if (goldKyat === 0 && goldPe === 0 && goldYway === 0) {
                     alert('ကျေးဇူးပြု၍ ရွှေချိန် ဖြည့်စွက်ပါ။'); return;
                 }
@@ -695,7 +725,7 @@
 
             const recordData = { 
                 date, personName, personPhone, description, 
-                category: activeCategory, type: activeType, 
+                category, type, 
                 amount: parseFloat(amount) || 0, goldKyat, goldPe, goldYway
             };
 
@@ -727,9 +757,6 @@
             document.getElementById('goldPe').value = rec.goldPe || '';
             document.getElementById('goldYway').value = rec.goldYway || '';
 
-            activeCategory = rec.category;
-            activeType = rec.type;
-
             closeModal();
             document.getElementById('formCard').scrollIntoView({ behavior: 'smooth' });
         }
@@ -747,9 +774,11 @@
             document.getElementById('goldKyat').value = '';
             document.getElementById('goldPe').value = '';
             document.getElementById('goldYway').value = '';
-            document.getElementById('selectIn').value = '';
-            document.getElementById('selectOut').value = '';
-            clearGoldDropdowns();
+            
+            ['selectIn', 'selectOut', 'goldInSelect', 'goldOutSelect'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+
             document.getElementById('recordDate').valueAsDate = new Date();
         }
 
@@ -802,7 +831,7 @@
             const netGold = pGoldInYway - pGoldOutYway;
 
             summaryBox.innerHTML = `
-                <div style="background:#f8fafc; padding:8px; border-radius:6px; border:1px solid #e2e8f0;">
+                <div style="background:#f8fafc; padding:6px; border-radius:6px; border:2px solid #cbd5e1; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
                     <div><strong>ငွေစာရင်း လက်ကျန်:</strong> <span class="${netMoney>=0?'val-in':'val-out'}">${netMoney>=0?'+':''}${netMoney.toLocaleString()} ကျပ်</span></div>
                     <div><strong>ရွှေစာရင်း လက်ကျန်:</strong> <span class="${netGold>=0?'val-in':'val-out'}">${netGold>=0?'ပိုရွှေ: ':'စိုက်ရွှေ: '}${formatGold(netGold)}</span></div>
                 </div>
